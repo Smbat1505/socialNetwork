@@ -1,0 +1,16 @@
+.post img {
+    /* Add styles for the regular posts here */
+    width: 50px;
+    background: #ffe250;
+    border-radius: 50px;
+}
+
+.item{
+    color: coral;
+}
+
+.post{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}

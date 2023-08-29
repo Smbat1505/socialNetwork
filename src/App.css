@@ -1,0 +1,36 @@
+
+.app-wrapper {
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-areas:  'header header header' 'navigation content content';
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    /*grid-gap: 10px;*/
+
+    /*max-width: 1400px;*/
+    min-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+
+    position: relative;
+}
+
+.app-wrapper-content {
+    grid-area: content;
+
+    background: darkcyan;
+
+    height: calc(100vh - 60px);
+    /*height: auto;*/
+}
+
+
+li {
+    list-style-type: none;
+}
+
+
+
+
+

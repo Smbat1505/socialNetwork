@@ -1,0 +1,15 @@
+.friends img{
+    width: 30px;
+}
+
+.friends{
+    display: flex;
+    /*flex-direction: column;*/
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 5px;
+}
+.friend{
+    display: flex;
+    flex-direction: column;
+}

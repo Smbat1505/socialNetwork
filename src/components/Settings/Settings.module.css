@@ -1,0 +1,60 @@
+/* Settings.module.css */
+
+/* Other settings styles */
+
+
+.active {
+    /* Define your active style here */
+    color: #007bff;
+
+}
+.toggleButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+    width: 110px;
+    height: 30px;
+}
+
+.toggleButton:hover{
+    background: darkorange;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+/* Settings.module.css */
+.aside {
+    /* Your aside (menu) styles */
+    /*width: 100%;*/
+    /*background-color: #f0f0f0;*/
+    /*position: fixed;*/
+    /*left: 0;*/
+    /*top: 420px;*/
+    /*height: auto;*/
+    /*transition: left 0.3s ease-in-out;*/
+    width: 16%; /* Adjust the width as needed */
+    background-color: #f0f0f0;
+    position: absolute;
+    left: -30rem; /* Position from the right side */
+    top: 315px; /* Adjust the top positioning */
+    height: 150px; /* Occupy full height */
+    transition: left 0.3s ease-in-out;
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    z-index: 100;
+    border-radius: 0 7px 7px 0;
+}
+
+/* Add this class for the open redux */
+.open {
+    left: 0;
+}
+
+.closeButton {
+    /* Style your close button */
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}

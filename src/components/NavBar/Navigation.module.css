@@ -1,0 +1,65 @@
+/* Navigation.css */
+.navigation {
+    display: grid;
+    grid-area: navigation;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+
+    /*color: white;*/
+    /*padding: 10px;*/
+
+    /*background: gray;*/
+
+    width: 100%;
+    background-color: rgb(32, 65, 79); /* Adjust the background color as needed */
+    /*display: flex;*/
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px 20px;
+
+    box-sizing: border-box;
+}
+
+.navigation ul {
+    width: 100%;
+    height: auto;
+    min-height: 148px;
+    list-style: none;
+    padding: 0;
+}
+
+/*.navigation ul li {*/
+/*    margin: 5px 0;*/
+/*}*/
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 35px;
+    margin: 0 0 10px;
+
+}
+
+.item:hover {
+    background: darkorange;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+}
+
+.navigation a:hover {
+    color: #ffe250;
+    text-decoration: underline;
+}
+
+.navigation a.active {
+    color: blue;
+    font-size: 18px;
+    font-weight: bold;
+}
+
