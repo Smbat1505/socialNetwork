@@ -1,13 +1,6 @@
 import {v1} from "uuid";
 
-type AddActionType = {
-    type: 'ADD-POST'
-}
-type UpdateNewPostActionType = {
-    type: 'UPDATE-NEW-POST';
-    newPostMessage: string;
-}
-export type ActionType = AddActionType | UpdateNewPostActionType;
+export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostAC>;
 
 export type PostType = {
     id: number;
@@ -52,6 +45,20 @@ export type StoreType = {
 
 }
 
+export const addPostAC = () => {
+    return {
+        type: 'ADD-POST'
+    } as const
+}
+export const updateNewPostAC = (newPostMessage: string) => {
+    return {
+        type: 'UPDATE-NEW-POST',
+        payload: {
+            newPostMessage
+        }
+
+    } as const
+}
 export let store: StoreType = {
     _state: {
         profilePage: {
@@ -123,7 +130,7 @@ export let store: StoreType = {
             this._state.profilePage.newPost = '';
             this._callSubscriber(this._state);
         } else if (action.type === 'UPDATE-NEW-POST') {
-            this._state.profilePage.newPost = action.newPostMessage;
+            this._state.profilePage.newPost = action.payload.newPostMessage;
             this._callSubscriber(this._state);
         }
     }

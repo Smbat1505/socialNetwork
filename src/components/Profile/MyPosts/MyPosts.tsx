@@ -37,7 +37,7 @@ export const MyPosts: React.FC<MyPostsType> = (
         const newPostMessage = newPostElement.current?.value || '';
 
         let action = {type: "UPDATE-NEW-POST", newPostMessage}
-        dispatch({type: "UPDATE-NEW-POST", newPostMessage})
+        dispatch({type: "UPDATE-NEW-POST", payload: {newPostMessage}})
     };
 
     const handleOnKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
