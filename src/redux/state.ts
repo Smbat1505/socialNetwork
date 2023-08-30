@@ -1,5 +1,14 @@
 import {v1} from "uuid";
 
+type AddActionType = {
+    type: 'ADD-POST'
+}
+type UpdateNewPostActionType = {
+    type: 'UPDATE-NEW-POST';
+    newPostMessage: string;
+}
+export type ActionType = AddActionType | UpdateNewPostActionType;
+
 export type PostType = {
     id: number;
     message: string;
@@ -32,8 +41,18 @@ export type RootStateType = {
     friends: FriendType[];
 }
 
+export type StoreType = {
+    _state: RootStateType;
+    _callSubscriber: (state: RootStateType) => void;
 
-export let store = {
+    subscribe: (callback: (state: RootStateType) => void) => void;
+    getState: () => RootStateType;
+
+    dispatch: (action: ActionType) => void;
+
+}
+
+export let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -82,64 +101,45 @@ export let store = {
             },
         ]
     },
+    _callSubscriber() {
+        console.log('state change')
+    },
+
+    subscribe(observer) {
+        this._callSubscriber = observer;  // pattern observer
+    },
     getState() {
         return this._state
     },
-    _callSubscriber(state: RootStateType) {
-        console.log('state change')
-    },
-    addPost() {
-        // debugger
-        const newPost: PostType = {
-            id: new Date().getTime(),
-            message: this._state.profilePage.newPost,
-            likeCount: 0,
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostType = {
+                id: new Date().getTime(),
+                message: this._state.profilePage.newPost,
+                likeCount: 0,
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPost = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST') {
+            this._state.profilePage.newPost = action.newPostMessage;
+            this._callSubscriber(this._state);
         }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPost = '';
-        this._callSubscriber(this._state);
-    },
-    updateNewPost(newPostMessage: string) {
-        let newPost = {id: 8, message: postMessage, likeCount: 0}
-        this._state.profilePage.newPost = newPostMessage;
-        this._callSubscriber(this._state);
-    },
-    subscribe(observer: (state: RootStateType) => void) {
-        this._callSubscriber = observer;  // pattern observer
     }
 
 }
 
 ////////////////  test
-interface CustomWindow extends Window {
-    state: RootStateType;
-}
-
-declare var window: CustomWindow;
-
-// Now you can set the state property
-window.state = store._state
-
+// interface CustomWindow extends Window {
+//     state: RootStateType;
+// }
+//
+// declare var window: CustomWindow;
+//
+// // Now you can set the state property
+// window.state = store._state
+//
 
 ////////////////// end test
-// export const addPost = () => {
-//     let newPost = {
-//         id: v1(),
-//         message: state.profilePage.newPost,
-//         likeCount: '0',
-//     }
-//     state.profilePage.posts.push(newPost)
-//     state.profilePage.newPost = '';
-//     rerenderEntireTree(state);
-// }
-
-
-// export const updateNewPost = (newPostMessage: string) => {
-//     let newPost = {id: v1(), message: postMessage, likeCount: '0'}
-//     state.profilePage.newPost = newPostMessage;
-//     rerenderEntireTree(state);
-// }
-
-// export const subscribe = (observer: (state: AppStateType) => void) => {
-//     rerenderEntireTree = observer;  // pattern observer
 // }

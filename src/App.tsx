@@ -4,30 +4,39 @@ import {Header} from "./components/Header/Header";
 import {Navigation} from "./components/NavBar/Navigation";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {RootStateType} from "./redux/state";
+import {Route, Routes} from "react-router-dom";
+import {ActionType, StoreType} from "./redux/state";
 
 
 type AppType = {
-    appState: RootStateType;
-    addPost: () => void;
-    updateNewPost: (newText: string) => void;
+    store: StoreType;
+    dispatch: (action: ActionType) => void;
 }
 const App: React.FC<AppType> = ({
-                                    appState,
-                                    addPost,
-                                    updateNewPost
+                                    store,
+                                    dispatch
                                 }) => {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navigation  friends={appState.friends}/>
+            <Navigation friends={store.getState().friends}/>
             <section className={"app-wrapper-content"}>
 
                 <Routes>
-                    <Route path={'/'} element={<Profile profilePage={appState.profilePage} addPost={addPost} updateNewPost={updateNewPost}/>}/>
-                    <Route path={'/dialogs'}
-                           element={<Dialogs state={appState.dialogsPage}/>}/>
+                    <Route
+                        path={'/'}
+                        element={
+                            <Profile
+                                profilePage={store.getState().profilePage}
+                                dispatch={dispatch}
+                            />}
+                    />
+                    <Route
+                        path={'/dialogs'}
+                        element={<Dialogs
+                            state={store.getState().dialogsPage}
+                        />}
+                    />
                 </Routes>
             </section>
         </div>

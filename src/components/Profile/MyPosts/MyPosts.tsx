@@ -1,40 +1,43 @@
 import React, {KeyboardEvent, ChangeEvent, useState, RefObject} from 'react';
 import styles from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import {PostType} from '../../../redux/state';
+import {ActionType, PostType} from '../../../redux/state';
 
 export type MyPostsType = {
     posts: PostType[];
-    addPost: () => void;
     newPost: string;
-    updateNewPost: (newText: string) => void;
+    dispatch: (action: ActionType) => void;
 };
 
-export const MyPosts: React.FC<MyPostsType> = ({posts, addPost, newPost, updateNewPost,}) => {
-    let postElements = posts.map((post) => (
-        <Post key={post.id} message={post.message} likeCount={post.likeCount}/>
-    ));
+export const MyPosts: React.FC<MyPostsType> = (
+    {
+        posts,
+        newPost,
+        dispatch
+    }
+) => {
+    let postElements = posts.map(
+        (post) => (
+            <Post
+                key={post.id}
+                message={post.message}
+                likeCount={post.likeCount}
+            />
+        ));
 
 
     // const newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const handleOnAddPost = () => {
-        // debugger
-        // Todo Используя (newPostElement.current as HTMLInputElement), вы указываете TypeScript рассматривать его newPostElement.current как HTMLInputElement, у которого есть value свойство.
-        // let post = newPostElement.current?.value || '';
-        // console.log('hi ' + post)
-
-        addPost(); // Clear the textarea after adding the post
-        // newPostElement.current!.value = '';
-
+        dispatch({type: "ADD-POST"})
     };
 
     const handleOnChange = () => {
-        // const newValue = (newPostElement.current as HTMLTextAreaElement).value;
-        const newValue = newPostElement.current?.value || '';
-        console.log(newValue)
-        updateNewPost(newValue);
+        const newPostMessage = newPostElement.current?.value || '';
+
+        let action = {type: "UPDATE-NEW-POST", newPostMessage}
+        dispatch({type: "UPDATE-NEW-POST", newPostMessage})
     };
 
     const handleOnKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
