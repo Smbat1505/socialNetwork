@@ -1,4 +1,4 @@
-import React, {KeyboardEvent, ChangeEvent, useState, RefObject} from 'react';
+import React from 'react';
 import styles from './MyPosts.module.css';
 import {Post} from './Post/Post';
 import {ActionType, addPostAC, PostType, updateNewPostAC} from '../../../redux/state';
