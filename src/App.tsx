@@ -5,14 +5,16 @@ import {Navigation} from "./components/NavBar/Navigation";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
-import {ActionType, StoreType} from "./redux/state";
+import {ActionType, RootStateType, StoreType} from "./redux/state";
 
 
 type AppType = {
+    state: RootStateType;
     store: StoreType;
     dispatch: (action: ActionType) => void;
 }
 const App: React.FC<AppType> = ({
+                                    state,
                                     store,
                                     dispatch
                                 }) => {
@@ -33,9 +35,8 @@ const App: React.FC<AppType> = ({
                     />
                     <Route
                         path={'/dialogs'}
-                        element={<Dialogs
-                            state={store.getState().dialogsPage}
-                        />}
+                        element={
+                        <Dialogs store={store}/>}
                     />
                 </Routes>
             </section>

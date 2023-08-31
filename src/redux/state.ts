@@ -1,6 +1,13 @@
 import {v1} from "uuid";
+import profileReducer, {addPostAC, updateNewPostAC} from "./profile-reduser";
+import dialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reduser";
+import sidebarReducer from "./sidbar-reduser";
 
-export type ActionType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostAC>;
+export type ActionType =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>;
 
 export type PostType = {
     id: number;
@@ -22,7 +29,7 @@ export type ProfilePageType = {
 export type MessagesPageType = {
     messages: MessageType[];
     dialogs: DialogType[];
-
+    newMessageBody: string;
 }
 export type FriendType = {
     id: string;
@@ -45,20 +52,8 @@ export type StoreType = {
 
 }
 
-export const addPostAC = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
-export const updateNewPostAC = (newPostMessage: string) => {
-    return {
-        type: 'UPDATE-NEW-POST',
-        payload: {
-            newPostMessage
-        }
 
-    } as const
-}
+
 export let store: StoreType = {
     _state: {
         profilePage: {
@@ -92,6 +87,7 @@ export let store: StoreType = {
                 {id: 6, name: 'Oleg'},
                 {id: 7, name: 'Vladimir'},
             ],
+            newMessageBody: '',
         },
         friends: [
             {
@@ -120,21 +116,14 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost: PostType = {
-                id: new Date().getTime(),
-                message: this._state.profilePage.newPost,
-                likeCount: 0,
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPost = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST') {
-            this._state.profilePage.newPost = action.payload.newPostMessage;
-            this._callSubscriber(this._state);
-        }
-    }
 
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.friends = sidebarReducer(this._state.friends, action)
+
+        this._callSubscriber(this._state);
+
+    }
 }
 
 ////////////////  test
