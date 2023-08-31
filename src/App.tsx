@@ -12,9 +12,11 @@ import {DialogsContainer} from "./components/Dialogs/message/DialogsContainer";
 
 type AppType = {
     store: ReduxStoreType; // Use the new type here
+    state: RootStateType
 }
 const App: React.FC<AppType> = ({
                                     store,
+                                    state
                                 }) => {
 
     return (

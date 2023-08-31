@@ -12,7 +12,7 @@ let subscriberCallback = (state: RootStateType) => {
     // debugger
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} store={store} dispatch={store.dispatch.bind(store)}/>
+            <App state={state} store={store}/>
         </BrowserRouter>,
         document.getElementById('root')
     );
