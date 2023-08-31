@@ -4,7 +4,7 @@ import friendStyle from '../Friends/Frends.module.css'
 import {NavLink, Route, Routes, useLocation} from 'react-router-dom';
 import {Settings} from "../Settings/Settings";
 import {Friends} from "../Friends/Friends";
-import {FriendType} from "../../redux/state";
+import {FriendType} from "../../redux/store";
 
 type NavigationType = {
     friends: FriendType[];

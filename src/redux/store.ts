@@ -38,7 +38,7 @@ export type FriendType = {
 export type RootStateType = {
     profilePage: ProfilePageType;
     dialogsPage: MessagesPageType;
-    friends: FriendType[];
+    sidebar: FriendType[];
 }
 
 export type StoreType = {
@@ -89,7 +89,7 @@ export let store: StoreType = {
             ],
             newMessageBody: '',
         },
-        friends: [
+        sidebar: [
             {
                 id: v1(),
                 name: 'Dima',
@@ -119,7 +119,7 @@ export let store: StoreType = {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-        this._state.friends = sidebarReducer(this._state.friends, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
         this._callSubscriber(this._state);
 

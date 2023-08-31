@@ -1,20 +1,21 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import { addPostAC, updateNewPostAC} from '../../../redux/profile-reduser';
-import {ActionType, PostType} from "../../../redux/state";
+import { PostType} from "../../../redux/store";
 
 export type MyPostsType = {
     posts: PostType[];
     newPost: string;
-    dispatch: (action: ActionType) => void;
+    addPost: ()=>void;
+    updateNewPostText: (text: string) => void
 };
 
 export const MyPosts: React.FC<MyPostsType> = (
     {
         posts,
         newPost,
-        dispatch
+        updateNewPostText,
+        addPost
     }
 ) => {
     let postElements = posts.map(
@@ -31,12 +32,12 @@ export const MyPosts: React.FC<MyPostsType> = (
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const handleOnAddPost = () => {
-        dispatch(addPostAC())
+        addPost()
     };
 
     const handleOnChange = () => {
-        const newPostMessage = newPostElement.current?.value || '';
-        dispatch(updateNewPostAC(newPostMessage))
+        const newPostText = newPostElement.current?.value || '';
+        updateNewPostText(newPostText)
     };
 
     const handleOnKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {

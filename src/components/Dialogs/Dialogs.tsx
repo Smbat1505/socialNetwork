@@ -2,30 +2,35 @@ import React, {ChangeEvent} from 'react';
 import dialogStyle from './Dialogs.module.css';
 import {Dialog} from "./dialog/Dialog";
 import {Message} from "./message/Message"
-import {sendMessageAC,updateNewMessageBodyAC} from "../../redux/dialogs-reduser";
-import {StoreType} from "../../redux/state";
+import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reduser";
+import {MessagesPageType, StoreType} from "../../redux/store";
+import {ReduxStoreType} from "../../index";
 
 type DialogsType = {
-    store: StoreType;
+    updateNewMessageBody: (body: string) => void;
+    sendMessage: () => void;
+    dialogsPage:  MessagesPageType;
 }
 export const Dialogs: React.FC<DialogsType> = ({
-                                                   store
+                                                   updateNewMessageBody,
+                                                   sendMessage,
+                                                   dialogsPage
                                                }) => {
-    let state = store.getState().dialogsPage;
+    let state = dialogsPage;
 
-    let dialogElements = state.dialogs.map(dialog => <Dialog id={dialog.id} name={dialog.name}/>)
+    let dialogElements = state.dialogs.map(dialog => <Dialog key={dialog.id} id={dialog.id} name={dialog.name}/>)
 
-    let messagesElements = state.messages.map(message => <Message message={message.message}/>)
+    let messagesElements = state.messages.map(message => <Message key={message.id} message={message.message}/>)
 
     let newMessageBody = state.newMessageBody
 
     const onSendMessageOnClick = () => {
-        store.dispatch(sendMessageAC())
+        sendMessage()
     }
 
     function onNewMessageOnChange(e: ChangeEvent<HTMLTextAreaElement>) {
         let body = e.currentTarget.value;
-        store.dispatch(updateNewMessageBodyAC(body))
+        updateNewMessageBody(body)
     }
 
     return (
@@ -46,7 +51,7 @@ export const Dialogs: React.FC<DialogsType> = ({
                         ></textarea>
                     </div>
                     <div>
-                        <button onClick={onSendMessageOnClick}>add</button>
+                        <button onClick={onSendMessageOnClick}>send</button>
                     </div>
                 </div>
 

@@ -5,23 +5,22 @@ import {Navigation} from "./components/NavBar/Navigation";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
-import {ActionType, RootStateType, StoreType} from "./redux/state";
+import {ActionType, RootStateType, StoreType} from "./redux/store";
+import {ReduxStoreType} from "./index";
+import {DialogsContainer} from "./components/Dialogs/message/DialogsContainer";
 
 
 type AppType = {
-    state: RootStateType;
-    store: StoreType;
-    dispatch: (action: ActionType) => void;
+    store: ReduxStoreType; // Use the new type here
 }
 const App: React.FC<AppType> = ({
-                                    state,
                                     store,
-                                    dispatch
                                 }) => {
+
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navigation friends={store.getState().friends}/>
+            <Navigation friends={store.getState().sidebar}/>
             <section className={"app-wrapper-content"}>
 
                 <Routes>
@@ -29,14 +28,13 @@ const App: React.FC<AppType> = ({
                         path={'/'}
                         element={
                             <Profile
-                                profilePage={store.getState().profilePage}
-                                dispatch={dispatch}
+                                store={store}
                             />}
                     />
                     <Route
                         path={'/dialogs'}
                         element={
-                        <Dialogs store={store}/>}
+                            <DialogsContainer store={store}/>}
                     />
                 </Routes>
             </section>
