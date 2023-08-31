@@ -1,7 +1,7 @@
 import React, {KeyboardEvent, ChangeEvent, useState, RefObject} from 'react';
 import styles from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import {ActionType, PostType} from '../../../redux/state';
+import {ActionType, addPostAC, PostType, updateNewPostAC} from '../../../redux/state';
 
 export type MyPostsType = {
     posts: PostType[];
@@ -30,14 +30,12 @@ export const MyPosts: React.FC<MyPostsType> = (
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const handleOnAddPost = () => {
-        dispatch({type: "ADD-POST"})
+        dispatch(addPostAC())
     };
 
     const handleOnChange = () => {
         const newPostMessage = newPostElement.current?.value || '';
-
-        let action = {type: "UPDATE-NEW-POST", newPostMessage}
-        dispatch({type: "UPDATE-NEW-POST", payload: {newPostMessage}})
+        dispatch(updateNewPostAC(newPostMessage))
     };
 
     const handleOnKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
