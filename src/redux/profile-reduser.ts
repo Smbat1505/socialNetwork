@@ -1,7 +1,16 @@
-import {ActionType, PostType, ProfilePageType, RootStateType} from "./store";
+import {ActionType} from "./redux-store";
 
+export type PostType = {
+    id: number;
+    message: string;
+    likeCount: number;
+}
+type ProfilePageType = {
+    posts: PostType[];
+    newPost: string;
+}
 
-const initialState: ProfilePageType = {
+const initialStateProfilePage = {
     posts: [
         {id: 1, message: ' Ho ', likeCount: 3},
         {id: 2, message: ' Hi ', likeCount: 4},
@@ -10,10 +19,11 @@ const initialState: ProfilePageType = {
         {id: 5, message: ' Hello ', likeCount: 490},
         {id: 6, message: ' Hello Andrey ', likeCount: 40},
         {id: 7, message: ' Hello Igor ', likeCount: 90},
-    ],
-    newPost: '',
+    ] as PostType[],
+    newPost: '' as string,
 }
-const profileReducer = (state: ProfilePageType = initialState, action: ActionType) => {
+export type InitialStateProfilePageType = typeof initialStateProfilePage
+const profileReducer = (state: InitialStateProfilePageType = initialStateProfilePage, action: ActionType): InitialStateProfilePageType => {
     // debugger
     switch (action.type) {
         case 'ADD-POST': {

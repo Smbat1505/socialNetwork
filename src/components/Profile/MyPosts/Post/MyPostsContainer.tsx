@@ -1,37 +1,36 @@
 import React from 'react';
 import {MyPosts} from "../MyPosts";
-import {addPostAC, updateNewPostAC} from "../../../../redux/profile-reduser";
-import {ActionType, PostType} from "../../../../redux/store";
-import {ReduxStoreType} from "../../../../index";
+import {addPostAC, InitialStateProfilePageType, PostType, updateNewPostAC} from "../../../../redux/profile-reduser";
+import {connect} from "react-redux";
+import {AppStateType} from "../../../../redux/redux-store";
+import {Dispatch} from "redux";
 
-export type MyPostContainerType = {
-    store: ReduxStoreType;
-};
+type MapStateToPropsType = {
+    posts: PostType[];
+    newPost: string;
+}
+type MapDispatchPropsType = {
+    updateNewPostText: (text: string) => void;
+    addPost: () => void;
+}
 
-export const MyPostContainer: React.FC<MyPostContainerType> = (
-    {
-        store
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchPropsType;
+
+function mapStateToProps(state: AppStateType): MapStateToPropsType {
+    return {
+        posts: state.profilePage.posts,
+        newPost: state.profilePage.newPost,
     }
-) => {
-const state= store.getState();
+}
 
-    const handleOnAddPost = () => {
-        store.dispatch(addPostAC())
-    };
+function mapDispatchToProps(dispatch: Dispatch): MapDispatchPropsType {
+    return {
+        updateNewPostText: (text: string) => {
+            let action = updateNewPostAC(text);
+            dispatch(action);
+        },
+        addPost: () => dispatch(addPostAC())
+    }
+}
 
-    const handleOnChange = (text: string) => {
-        store.dispatch(updateNewPostAC(text))
-    };
-
-    const handleOnKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent the default Enter behavior (newline insertion)
-            handleOnAddPost();      // Call the addPost function when Enter is pressed
-        }
-    };
-
-
-    return (
-        <MyPosts updateNewPostText={handleOnChange} addPost={handleOnAddPost} posts={state.profilePage.posts} newPost={state.profilePage.newPost}/>
-    );
-};
+export const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

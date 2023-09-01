@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import { PostType} from "../../../redux/store";
+import {PostType} from "../../../redux/profile-reduser";
+import {MyPostsPropsType} from "./Post/MyPostsContainer";
 
-export type MyPostsType = {
+ type MyPostsType = {
     posts: PostType[];
     newPost: string;
-    addPost: ()=>void;
+    addPost: () => void;
     updateNewPostText: (text: string) => void
 };
 
-export const MyPosts: React.FC<MyPostsType> = (
+export const MyPosts: React.FC<MyPostsPropsType> = (
     {
         posts,
         newPost,

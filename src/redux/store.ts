@@ -3,45 +3,45 @@ import profileReducer, {addPostAC, updateNewPostAC} from "./profile-reduser";
 import dialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reduser";
 import sidebarReducer from "./sidbar-reduser";
 
-export type ActionType =
+ type ActionType =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostAC>
     | ReturnType<typeof updateNewMessageBodyAC>
     | ReturnType<typeof sendMessageAC>;
 
-export type PostType = {
+ type PostType = {
     id: number;
     message: string;
     likeCount: number;
 }
-export type DialogType = {
+ type DialogType = {
     id: number;
     name: string;
 }
-export type MessageType = {
+ type MessageType = {
     id: number;
     message: string;
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: PostType[];
     newPost: string;
 }
-export type MessagesPageType = {
+ type MessagesPageType = {
     messages: MessageType[];
     dialogs: DialogType[];
     newMessageBody: string;
 }
-export type FriendType = {
+type FriendType = {
     id: string;
     name: string;
 }
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfilePageType;
     dialogsPage: MessagesPageType;
-    sidebar: FriendType[];
+    sidebar:  FriendType[] ;
 }
 
-export type StoreType = {
+ type StoreType = {
     _state: RootStateType;
     _callSubscriber: (state: RootStateType) => void;
 
@@ -54,7 +54,7 @@ export type StoreType = {
 
 
 
-export let store: StoreType = {
+ let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -119,7 +119,7 @@ export let store: StoreType = {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        // this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
         this._callSubscriber(this._state);
 

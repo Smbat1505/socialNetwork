@@ -1,16 +1,18 @@
 import React from 'react';
 import style from './Navigation.module.css'
-import friendStyle from '../Friends/Frends.module.css'
-import {NavLink, Route, Routes, useLocation} from 'react-router-dom';
+import friendStyle from './Friends/Frends.module.css'
+import {NavLink, useLocation} from 'react-router-dom';
 import {Settings} from "../Settings/Settings";
-import {Friends} from "../Friends/Friends";
-import {FriendType} from "../../redux/store";
+import {InitialStateSidebarType} from "../../redux/sidbar-reduser";
+import {Sidebar} from "./Friends/Sidebar";
+import {NavigationContainerProps} from "./NavigationContainer";
 
 type NavigationType = {
-    friends: FriendType[];
+    // friends: FriendType[];
 }
-export const Navigation: React.FC<NavigationType> = ({friends, children}) => {
+export const Navigation: React.FC<NavigationContainerProps> = ({friends}) => {
     const location = useLocation();
+
     // const active: string = style.active
     return (
         <>
@@ -33,8 +35,8 @@ export const Navigation: React.FC<NavigationType> = ({friends, children}) => {
                     <Settings/>
                 </ul>
                 <div className={friendStyle.friends}>
-                    {friends.map(friend => (
-                        <Friends key={friend.id} name={friend.name}
+                    {friends.sidebar.map(friend => (
+                        <Sidebar key={friend.id} name={friend.name}
                                  photo={"https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png"}/>
                     ))}
                 </div>

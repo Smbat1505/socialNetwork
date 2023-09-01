@@ -6,7 +6,7 @@ type FriendsType = {
     name: string;
     photo: string;
 }
-export const Friends: React.FC<FriendsType> = (
+export const Sidebar: React.FC<FriendsType> = (
     {
         name,
         photo,
@@ -20,3 +20,4 @@ export const Friends: React.FC<FriendsType> = (
 
     )
 }
+

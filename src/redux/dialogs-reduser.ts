@@ -1,8 +1,16 @@
-import {ActionType, DialogType, MessagesPageType} from "./store";
-import {ChangeEvent} from "react";
+import {ActionType} from "./redux-store";
+
+export type DialogType = {
+    id: number;
+    name: string;
+}
+export type MessageType = {
+    id: number;
+    message: string;
+}
 
 
-const initialState: MessagesPageType = {
+const initialStateDialogsPage = {
     messages: [
         {id: 1, message: 'ho'},
         {id: 2, message: 'hi'},
@@ -11,7 +19,7 @@ const initialState: MessagesPageType = {
         {id: 5, message: 'Hello oo '},
         {id: 6, message: 'Hello  ppp '},
         {id: 7, message: 'Hello dd'},
-    ],
+    ] as MessageType[],
     dialogs: [
         {id: 1, name: 'Dima'},
         {id: 2, name: 'Lena'},
@@ -20,10 +28,13 @@ const initialState: MessagesPageType = {
         {id: 5, name: 'Alex'},
         {id: 6, name: 'Oleg'},
         {id: 7, name: 'Vladimir'},
-    ],
-    newMessageBody: '',
+    ] as DialogType[],
+    newMessageBody: '' as string,
 }
-const dialogsReducer = (state: MessagesPageType = initialState, action: ActionType) => {
+
+export type initialStateDialogsPageType = typeof initialStateDialogsPage;
+
+const dialogsReducer = (state: initialStateDialogsPageType = initialStateDialogsPage, action: ActionType): initialStateDialogsPageType => {
 
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY':
