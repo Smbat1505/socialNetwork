@@ -32,13 +32,17 @@ const profileReducer = (state: InitialStateProfilePageType = initialStateProfile
                 message: state.newPost,
                 likeCount: 0,
             }
-            state.posts.push(newPost)
-            state.newPost = '';
-            return state;
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPost: ''
+            }
         }
         case 'UPDATE-NEW-POST': {
-            state.newPost = action.payload.newPostMessage;
-            return state;
+            return {
+                ...state,
+                newPost: action.payload.newPostMessage
+            }
         }
 
         default:
