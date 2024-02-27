@@ -1,0 +1,70 @@
+a{
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+.selectPageBlock{
+  width: 410px;
+  height: 47px;
+  padding: 0 10px;
+  background: #0000004f;
+  border-radius: 10px;
+  overflow: scroll;
+  position: absolute;
+  top: 10px;
+  display: flex;
+  left: 25%;
+  margin: 0 auto;
+  align-items: center;
+}
+.selectPage{}
+.selectPageBlock a.active {
+  /*color: #0b31d5;*/
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 7px  #f0f0f0;
+}
+.userPhoto {
+  width: 85px;
+  border-radius: 50px;
+}
+.usersBlock {
+  width: calc(100% - 250px);
+  height: calc(100% - 70px);
+  padding: 20px;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+.user {
+  display: inline-flex;
+  justify-content: space-between;
+  padding: 15px;
+  width: 700px;
+  /*background: darkslateblue;*/
+}
+.userDetails {
+}
+.userAbout {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 25px;
+}
+.followButton {
+}
+.userName {
+}
+.userStatus {
+}
+.userLocation {
+}
+.userLocation {
+}
+

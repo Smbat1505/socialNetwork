@@ -1,9 +1,8 @@
 /* styles.css */
 
 .main {
-    height: calc(100vh - 60px);
-    overflow: auto;
+  height: calc(100vh - 60px);
+  overflow: auto;
 
-    /*padding: 30px 0 50px ;*/
+  /*padding: 30px 0 50px ;*/
 }
-

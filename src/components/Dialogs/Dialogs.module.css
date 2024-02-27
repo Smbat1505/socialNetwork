@@ -1,53 +1,52 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
 }
 
 .dialogsItem {
-    padding: 10px;
-
+  padding: 10px;
 }
 
 .dialogsItem .dialog {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
 }
 .dialogsItem .dialog img {
-    width: 30px;
+  width: 30px;
 }
 .dialog {
 }
 
 .messages {
-    padding: 10px;
+  padding: 10px;
 }
 
 .message {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    height: 31px;
-    padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 31px;
+  padding: 10px;
 }
 
-.dialogsItem .active{
-    color: #f0f0f0;
+.dialogsItem .active {
+  color: #f0f0f0;
 }
-.aroundActive{
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50px;
-    background: #a4d806;
-    box-shadow: inset #333333 0 0 2px 1px;
+.aroundActive {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  background: #a4d806;
+  box-shadow: inset #333333 0 0 2px 1px;
 }
-.aroundOf{
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50px;
-    background: #d80625;
-    box-shadow: inset #333333 0 0 2px 1px;
+.aroundOf {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  background: #d80625;
+  box-shadow: inset #333333 0 0 2px 1px;
 }

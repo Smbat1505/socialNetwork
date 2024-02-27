@@ -1,11 +1,10 @@
 /* styles.css */
-.frontPhoto{
-    width: 100%;
-    height: 400px;
+.frontPhoto {
+  width: 100%;
+  height: 400px;
 }
 
 .ava {
-    /* Add your avatar styles here */
-    padding: 10px;
+  /* Add your avatar styles here */
+  padding: 10px;
 }
-

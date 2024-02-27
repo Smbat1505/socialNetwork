@@ -1,26 +1,28 @@
 /* styles.css */
 
 .header {
-    grid-area: header;
+  grid-area: header;
 
-    background-color: #333;
-    padding: 5px;
-    text-align: center;
+  background-color: #333;
+  padding: 5px;
+  text-align: center;
 
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .appLogo {
-    box-sizing: border-box;
-    position: absolute;
-    left: 0;
-    height: 6vmin;
-    pointer-events: none;
-    /*border-radius: 50px;*/
-    /*padding: 7px 10px;*/
-    margin-left: 10px;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  height: 6vmin;
+  pointer-events: none;
+  /*border-radius: 50px;*/
+  padding: 7px 10px;
+  margin-left: 10px;
 
-    /*background: white;*/
-    /*padding: 5px;*/
+  /*background: rgba(255, 255, 255, 0.51);*/
+  border-radius: 50px;
+  box-shadow: 0 2px 3px #333333;
+  /*padding: 5px;*/
 }

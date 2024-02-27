@@ -1,27 +1,28 @@
-
 .myPost {
-    /* Add styles for the "my Post" section here */
+  /* Add styles for the "my Post" section here */
 
-    padding: 20px 10px 100px;
+  padding: 20px 10px 100px;
 }
-.addPost{}
-.addBlock{
-    padding: 20px 10px 40px;
+.addPost {
 }
-.textareaBlock textarea{
-    padding: 5px 10px;
-    font-size: 16px;
+.addBlock {
+  padding: 20px 10px 40px;
 }
-.buttonBlock{}
+.textareaBlock textarea {
+  padding: 5px 10px;
+  font-size: 16px;
+}
+.buttonBlock {
+}
 
 .newPost {
-    /* Add styles for the "new Post" section here */
+  /* Add styles for the "new Post" section here */
 }
 
 .post {
-    /* Add styles for the regular posts here */
+  /* Add styles for the regular posts here */
 }
 
-.item{
-    color: coral;
+.item {
+  color: coral;
 }
