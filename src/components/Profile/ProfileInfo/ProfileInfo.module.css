@@ -7,4 +7,16 @@
 .ava {
   /* Add your avatar styles here */
   padding: 10px;
+  position: relative;
+}
+
+.profileInfo{
+  /*height: 30vh;*/
+  /*display: flex;*/
+  /*padding: 10px;*/
+  /*background: darkslategray;*/
+  /*align-items: center;*/
+  /*width: 100%;*/
+  /*gap: 40px;*/
+  /*justify-content: center;*/
 }

@@ -15,6 +15,7 @@ let store: StoreType = {
         { id: 7, message: " Hello Igor ", likeCount: 90 },
       ],
       newPost: "",
+      profile: {} as ProfileType,
     },
     dialogsPage: {
       messages: [
@@ -64,7 +65,7 @@ let store: StoreType = {
   },
 
   dispatch(action) {
-    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    // this._state.profilePage = profileReducer(this._state.profilePage, action);
     this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
     // this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
@@ -105,9 +106,32 @@ type MessageType = {
   id: number;
   message: string;
 };
+type ContactsType = {
+  facebook: string;
+  website: null;
+  vk: string;
+  twitter: string;
+  instagram: string;
+  youtube: null;
+  github: string;
+  mainLink: null;
+};
+type ProfileType = {
+  aboutMe: string;
+  contacts: ContactsType;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  fullName: string;
+  userId: number;
+  photos: {
+    small: string;
+    large: string;
+  };
+};
 type ProfilePageType = {
   posts: PostType[];
   newPost: string;
+  profile: ProfileType;
 };
 type MessagesPageType = {
   messages: MessageType[];

@@ -4,18 +4,24 @@ a{
 }
 
 .selectPageBlock{
-  width: 410px;
-  height: 47px;
+  width: 30px;
+  height: 91vh;
   padding: 0 10px;
   background: #0000004f;
+  /*box-sizing: border-box;*/
   border-radius: 10px;
   overflow: scroll;
   position: absolute;
-  top: 10px;
   display: flex;
-  left: 25%;
+  flex-direction: column;
+  right: 10px;
+  bottom: 15px;
   margin: 0 auto;
   align-items: center;
+  box-shadow: inset 0px 0px 20px 7px #0a67a363;
+}
+.items{
+  padding: 10px;
 }
 .selectPage{}
 .selectPageBlock a.active {
@@ -26,6 +32,8 @@ a{
   text-shadow: 0 0 7px  #f0f0f0;
 }
 .userPhoto {
+  position: absolute;
+  left: 0;
   width: 85px;
   border-radius: 50px;
 }
@@ -44,7 +52,7 @@ a{
 .user {
   display: inline-flex;
   justify-content: space-between;
-  padding: 15px;
+  /*padding: 15px;*/
   width: 700px;
   /*background: darkslateblue;*/
 }

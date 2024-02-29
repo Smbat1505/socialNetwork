@@ -14,7 +14,6 @@ import {
 import React from "react";
 import axios from "axios";
 import { UsersPr } from "components/Users/UsersPr";
-import { logging, logg } from "img";
 import { Preloader } from "components/common/preolader/Preloader";
 
 class UsersAPI extends React.Component<UsersProps, InitialStateUsersPageType> {

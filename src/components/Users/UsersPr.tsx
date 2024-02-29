@@ -2,6 +2,7 @@ import React from "react";
 import styles from "components/Users/users.module.css";
 import { avatar_2 } from "img";
 import { UsersProps } from "components/Users/UsersContainer";
+import { NavLink } from "react-router-dom";
 
 export const UsersPr: React.FC<UsersPrType> = (props) => {
   let pagesCount = Math.ceil(props.totalUserCounter / props.pageSize);
@@ -16,12 +17,11 @@ export const UsersPr: React.FC<UsersPrType> = (props) => {
       <div className={styles.selectPageBlock}>
         {pages.map((p) => {
           return (
-            <span key={p}>
+            <span key={p} className={styles.items}>
               <a
                 href="#"
                 className={props.currentPage === p ? styles.active : ""}
                 onClick={() => props.onPageChanged(p)}
-                style={{ padding: "10px", marginLeft: "10px" }}
               >
                 {p}
               </a>
@@ -32,12 +32,14 @@ export const UsersPr: React.FC<UsersPrType> = (props) => {
       {props.users.map((us) => (
         <div key={us.id} className={styles.user}>
           <span className={styles.userDetails}>
-            <div>
-              <img
-                src={us.photos.small !== null ? us.photos.small : avatar_2}
-                className={styles.userPhoto}
-                alt="аватар"
-              />
+            <div style={{ position: "relative" }}>
+              <NavLink to={`/profile/${us.id}`}>
+                <img
+                  src={us.photos.small !== null ? us.photos.large : avatar_2}
+                  className={styles.userPhoto}
+                  alt="аватар"
+                />
+              </NavLink>
             </div>
             <div>
               {us.followed ? (

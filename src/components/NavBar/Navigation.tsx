@@ -19,6 +19,11 @@ export const Navigation: React.FC<NavigationContainerProps> = ({ friends }) => {
         <ul>
           <li className={style.item}>
             <NavLink to="/" className={location.pathname === "/" ? style.active : ""}>
+              Home
+            </NavLink>
+          </li>
+          <li className={style.item}>
+            <NavLink to="/Profile" className={location.pathname === "/Profile" ? style.active : ""}>
               Profile
             </NavLink>
           </li>
