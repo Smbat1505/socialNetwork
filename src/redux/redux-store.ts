@@ -7,10 +7,25 @@ import usersReducer, {
   SetCurrentPage,
   SetUsers,
   setUsersTotalCount,
+  toggleFollowingInProgress,
   toggleIsFetching,
   UnFollow,
 } from "redux/users-reduser";
+import authReducer, { setAuthUserData } from "redux/auth-reduser";
 
+const rootReducer = combineReducers({
+  profilePage: profileReducer,
+  dialogsPage: dialogsReducer,
+  sidebar: sidebarReducer,
+  usersPage: usersReducer,
+  auth: authReducer,
+});
+
+const store = createStore(rootReducer);
+
+export default store;
+
+export type AppStateType = ReturnType<typeof rootReducer>;
 export type ActionType =
   | ReturnType<typeof addPostAC>
   | ReturnType<typeof updateNewPostAC>
@@ -22,17 +37,6 @@ export type ActionType =
   | ReturnType<typeof setUsersTotalCount>
   | ReturnType<typeof toggleIsFetching>
   | ReturnType<typeof SetCurrentPage>
-  | ReturnType<typeof setUserProfile>;
-
-const rootReducer = combineReducers({
-  profilePage: profileReducer,
-  dialogsPage: dialogsReducer,
-  sidebar: sidebarReducer,
-  usersPage: usersReducer,
-});
-
-export type AppStateType = ReturnType<typeof rootReducer>;
-
-const store = createStore(rootReducer);
-
-export default store;
+  | ReturnType<typeof setUserProfile>
+  | ReturnType<typeof setAuthUserData>
+  | ReturnType<typeof toggleFollowingInProgress>;

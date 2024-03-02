@@ -6,13 +6,9 @@ import { Settings } from "../Settings/Settings";
 import { Sidebar } from "./Friends/Sidebar";
 import { NavigationContainerProps } from "./NavigationContainer";
 
-type NavigationType = {
-  // friends: FriendType[];
-};
 export const Navigation: React.FC<NavigationContainerProps> = ({ friends }) => {
   const location = useLocation();
 
-  // const active: string = style.active
   return (
     <>
       <nav className={style.navigation}>
@@ -23,7 +19,7 @@ export const Navigation: React.FC<NavigationContainerProps> = ({ friends }) => {
             </NavLink>
           </li>
           <li className={style.item}>
-            <NavLink to="/Profile" className={location.pathname === "/Profile" ? style.active : ""}>
+            <NavLink to="/profile" className={location.pathname === "/profile" ? style.active : ""}>
               Profile
             </NavLink>
           </li>

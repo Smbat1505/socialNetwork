@@ -3,6 +3,8 @@ import styles from "components/Users/users.module.css";
 import { avatar_2 } from "img";
 import { UsersProps } from "components/Users/UsersContainer";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { authAPI } from "components/auth/auth.api";
 
 export const UsersPr: React.FC<UsersPrType> = (props) => {
   let pagesCount = Math.ceil(props.totalUserCounter / props.pageSize);
@@ -35,7 +37,7 @@ export const UsersPr: React.FC<UsersPrType> = (props) => {
             <div style={{ position: "relative" }}>
               <NavLink to={`/profile/${us.id}`}>
                 <img
-                  src={us.photos.small !== null ? us.photos.large : avatar_2}
+                  src={us.photos.small !== null ? us.photos.small : avatar_2}
                   className={styles.userPhoto}
                   alt="аватар"
                 />
@@ -43,11 +45,37 @@ export const UsersPr: React.FC<UsersPrType> = (props) => {
             </div>
             <div>
               {us.followed ? (
-                <button className={styles.followButton} onClick={() => props.followM(us.id)}>
+                <button
+                  disabled={props.toggleFollowingInProgress.some((id: number) => id === us.id)}
+                  className={styles.unFollowButton}
+                  onClick={() => {
+                    // debugger;
+                    props.toggleFollowingInProgressM(true, us.id);
+                    authAPI.unfollow(us.id).then((data) => {
+                      if (data.resultCode === 0) {
+                        props.unFollowM(us.id);
+                      }
+                      props.toggleFollowingInProgressM(false, us.id);
+                    });
+                  }}
+                >
                   Отписаться
                 </button>
               ) : (
-                <button className={styles.followButton} onClick={() => props.unFollowM(us.id)}>
+                <button
+                  disabled={props.toggleFollowingInProgress.some((id: number) => id === us.id)}
+                  className={styles.followButton}
+                  onClick={() => {
+                    // debugger;
+                    props.toggleFollowingInProgressM(true, us.id);
+                    authAPI.follow(us.id).then((data) => {
+                      if (data.resultCode === 0) {
+                        props.followM(us.id);
+                      }
+                      props.toggleFollowingInProgressM(false, us.id);
+                    });
+                  }}
+                >
                   Подписаться
                 </button>
               )}

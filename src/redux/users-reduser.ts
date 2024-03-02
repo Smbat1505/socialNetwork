@@ -6,6 +6,7 @@ const initialUsersState = {
   totalUsersCounter: 0,
   currentPage: 1,
   isFetching: true,
+  followingInProgress: [] as number[],
 };
 
 const usersReducer = (
@@ -19,7 +20,7 @@ const usersReducer = (
         ...state,
         users: state.users.map((user) => {
           if (user.id === action.userId) {
-            return { ...user, followed: false };
+            return { ...user, followed: true };
           }
           return user;
         }),
@@ -29,7 +30,7 @@ const usersReducer = (
       return {
         ...state,
         users: state.users.map((user) =>
-          user.id === action.userId ? { ...user, followed: true } : user,
+          user.id === action.userId ? { ...user, followed: false } : user,
         ),
       };
     case "SET-USERS":
@@ -43,6 +44,14 @@ const usersReducer = (
 
     case "TOGGLE-IS-FETCHING":
       return { ...state, isFetching: action.isFetching };
+    case "TOGGLE-IS-FOLLOWING-IN-PROGRESS":
+      // debugger;
+      return {
+        ...state,
+        followingInProgress: action.isFetching
+          ? [...state.followingInProgress, action.id]
+          : state.followingInProgress.filter((id: number) => id !== action.id),
+      };
     default:
       return state;
   }
@@ -80,6 +89,12 @@ export const toggleIsFetching = (isFetching: boolean) =>
     type: "TOGGLE-IS-FETCHING",
     isFetching,
   }) as const;
+export const toggleFollowingInProgress = (isFetching: boolean, id: number) =>
+  ({
+    type: "TOGGLE-IS-FOLLOWING-IN-PROGRESS",
+    isFetching,
+    id,
+  }) as const;
 
 export const setUsersTotalCount = (totalUsersCount: number) =>
   ({
@@ -98,19 +113,15 @@ type ProfilePageType = {
 };
 
 export type UserType = {
-  id: number;
-  photos: {
-    small: string | undefined;
-    large: string | undefined;
-  };
-  followed: boolean;
   name: string;
-  status: string;
-  uniqueUrlName: null;
-  location: {
-    city: string;
-    country: string;
+  id: number;
+  uniqueUrlName: string | null;
+  photos: {
+    small: string | null;
+    large: string | null;
   };
+  status: string | null;
+  followed: boolean;
 };
 
 export type InitialStateUsersPageType = typeof initialUsersState;

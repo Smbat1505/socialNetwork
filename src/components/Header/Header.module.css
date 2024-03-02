@@ -26,3 +26,29 @@
   box-shadow: 0 2px 3px #333333;
   /*padding: 5px;*/
 }
+
+.loginBlock{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 30px;
+  position: absolute;
+  right: 20px;
+  color: #f0f0f0;
+
+
+}
+.loginBlock a{
+  width: 100%;
+  cursor: pointer;
+  padding: 10px;
+  box-shadow: 0 0 3px #ffffff;
+  border-radius: 7px;
+  box-sizing: border-box;
+}
+
+.loginBlock a:hover{
+  box-shadow: 0 0 3px #05e511;
+  background: #20414f;
+}

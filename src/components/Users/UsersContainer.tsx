@@ -7,6 +7,7 @@ import {
   SetCurrentPage,
   SetUsers,
   setUsersTotalCount,
+  toggleFollowingInProgress,
   toggleIsFetching,
   UnFollow,
   UserType,
@@ -15,32 +16,26 @@ import React from "react";
 import axios from "axios";
 import { UsersPr } from "components/Users/UsersPr";
 import { Preloader } from "components/common/preolader/Preloader";
+import { userAPI } from "components/Users/user.api";
 
 class UsersAPI extends React.Component<UsersProps, InitialStateUsersPageType> {
   componentDidMount() {
     this.props.toggleIsFetchingM(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-      )
-      .then((res) => {
-        this.props.toggleIsFetchingM(false);
-        this.props.setUsersM(res.data.items);
-        this.props.setTotalUsersCountM(res.data.totalCount);
-      });
+    userAPI.getUser(this.props.currentPage, this.props.pageSize).then((data) => {
+      // debugger;
+      this.props.toggleIsFetchingM(false);
+      this.props.setUsersM(data.items);
+      this.props.setTotalUsersCountM(data.totalCount);
+    });
   }
 
   onPageChanged = (pageNumber: number) => {
     this.props.setCurrentPageM(pageNumber);
     this.props.toggleIsFetchingM(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-      )
-      .then((res) => {
-        this.props.toggleIsFetchingM(false);
-        this.props.setUsersM(res.data.items);
-      });
+    userAPI.getUser(this.props.currentPage, this.props.pageSize).then((data) => {
+      this.props.toggleIsFetchingM(false);
+      this.props.setUsersM(data.items);
+    });
   };
 
   render() {
@@ -60,6 +55,8 @@ class UsersAPI extends React.Component<UsersProps, InitialStateUsersPageType> {
           setUsersM={this.props.setUsersM}
           isFetching
           toggleIsFetchingM={this.props.toggleIsFetchingM}
+          toggleFollowingInProgressM={this.props.toggleFollowingInProgressM}
+          toggleFollowingInProgress={this.props.toggleFollowingInProgress}
         />
       </>
     );
@@ -73,6 +70,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     totalUserCounter: state.usersPage.totalUsersCounter,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    toggleFollowingInProgress: state.usersPage.followingInProgress,
   };
 };
 
@@ -93,8 +91,11 @@ function mapDispatchToProps(dispatch: Dispatch): MapDispatchToPropsType {
     setTotalUsersCountM: (totalUsersCount: number) => {
       dispatch(setUsersTotalCount(totalUsersCount));
     },
-    toggleIsFetchingM: (isFetching) => {
+    toggleIsFetchingM: (isFetching: boolean) => {
       dispatch(toggleIsFetching(isFetching));
+    },
+    toggleFollowingInProgressM: (isFetching: boolean, id: number) => {
+      dispatch(toggleFollowingInProgress(isFetching, id));
     },
   };
 }
@@ -107,6 +108,7 @@ type MapStateToPropsType = {
   totalUserCounter: number;
   currentPage: number;
   isFetching: boolean;
+  toggleFollowingInProgress: number[];
 };
 
 type MapDispatchToPropsType = {
@@ -116,6 +118,7 @@ type MapDispatchToPropsType = {
   setCurrentPageM: (pageNumber: number) => void;
   setTotalUsersCountM: (totalUsersCount: number) => void;
   toggleIsFetchingM: (isFetching: boolean) => void;
+  toggleFollowingInProgressM: (isFetching: boolean, id: number) => void;
 };
 
 export type UsersProps = MapStateToPropsType & MapDispatchToPropsType;
